@@ -25,14 +25,11 @@ with open(inputFileLoc, 'r', encoding='utf-8') as csv_in:
 			if os.path.exists(logLoc):
 				os.remove(logLoc)
 			cmd = ' '.join([chromeLoc, \
-				"--enable-logging", "--v=1", link])
-			if os.name == 'posix':
-				subprocess.run([cmd], shell=True)
-				time.sleep(sleepTime)
-			else:
-				pro = subprocess.Popen(cmd, stdout=subprocess.PIPE) 
-				time.sleep(sleepTime)
-				pro.terminate()
+				"--enable-logging", link])
+			pro = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid)
+			time.sleep(sleepTime)
+			os.killpg(os.getpgid(pro.pid), signal.SIGTERM)   
+			pro.terminate()
 			fin = open(logLoc, 'r')
 			for line in fin.readlines():
 				if "CONSOLE" in line:
