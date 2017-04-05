@@ -12,7 +12,6 @@ writer = csv.writer(csv_out)
 with open(inputFileLoc, 'r', encoding='utf-8') as csv_in:
 	reader = csv.reader(csv_in)
 	count = 0
-	reg = re.compile('.*CONSOLE.*')
 	for row in reader:
 		count += 1
 		if count == 1:
@@ -30,9 +29,14 @@ with open(inputFileLoc, 'r', encoding='utf-8') as csv_in:
 			pro = subprocess.Popen(cmd, stdout=subprocess.PIPE) 
 			time.sleep(sleepTime)
 			pro.terminate()
-			for line in open(logLoc, 'r'):
-				if reg.search(line):
+			fin = open(logLoc, 'r')
+			for line in fin.readlines():
+				print(line)
+				if "CONSOLE" in line:
 					bits = line.split(']')
 					secHalf = bits[1:]
-					relevantLines.append(secHalf)
+					print(' '.join(secHalf))
+					relevantLines.append(' '.join(secHalf))
+			fin.close()
+			time.sleep(1)
 		writer.writerow([row[0], row[1], link, '|'.join(relevantLines)])
