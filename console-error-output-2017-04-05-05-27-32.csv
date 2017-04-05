@@ -1,0 +1,6 @@
+305,odprietoh,http://ironhacks-2017-html.herokuapp.com/gold/1/2017-Purdue-UNAL-IronHack-xdanielsb/browser.html," ""Error in event handler for (unknown): TypeError: Cannot read property 'trace' of undefined
+"
+304,NicolasZon,http://ironhacks-2017-html.herokuapp.com/gold/1/2017-Purdue-UNAL-IronHack-NicolasZon/entregauno.html," ""Error in event handler for (unknown): TypeError: Cannot read property 'trace' of undefined
+| ""Google Maps API error: MissingKeyMapError https://developers.google.com/maps/documentation/javascript/error-messages#missing-key-map-error"", source: http://maps.googleapis.com/maps/api/js (35)
+| ""Google Maps API warning: NoApiKeys https://developers.google.com/maps/documentation/javascript/error-messages#no-api-keys"", source: http://maps.googleapis.com/maps-api-v3/api/js/28/8/util.js (210)
+"
