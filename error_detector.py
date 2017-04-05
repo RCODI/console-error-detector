@@ -26,13 +26,17 @@ with open(inputFileLoc, 'r', encoding='utf-8') as csv_in:
 				os.remove(logLoc)
 			cmd = ' '.join([chromeLoc, \
 				"--enable-logging", "--v=1", link])
-			pro = subprocess.Popen(cmd, stdout=subprocess.PIPE) 
-			time.sleep(sleepTime)
-			pro.terminate()
+			if os.name == 'posix':
+				subprocess.run([cmd], shell=True)
+				time.sleep(sleepTime)
+			else:
+				pro = subprocess.Popen(cmd, stdout=subprocess.PIPE) 
+				time.sleep(sleepTime)
+				pro.terminate()
 			fin = open(logLoc, 'r')
 			for line in fin.readlines():
-				print(line)
 				if "CONSOLE" in line:
+					print(line)
 					bits = line.split(']')
 					secHalf = bits[1:]
 					print(' '.join(secHalf))
